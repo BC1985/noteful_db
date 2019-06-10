@@ -3,6 +3,7 @@ const FolderServices = require("./folder-services");
 const folderRouter = express.Router();
 const { makeFoldersArray } = require("../data/folder-data");
 const xss = require("xss");
+const jsonParser = express.json();
 
 folderRouter
   .route("/folders")

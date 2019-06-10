@@ -2,6 +2,7 @@ const express = require("express");
 const NotesServices = require("./note-services");
 const notesRouter = express.Router();
 const { makeNotesArray } = require("../data/notes-data");
+const jsonParser = express.json();
 
 notesRouter
   .route("/notes")
