@@ -16,3 +16,5 @@ const FolderServices = {
       .delete();
   }
 };
+
+module.exports = { FolderServices };

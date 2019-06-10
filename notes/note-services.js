@@ -20,3 +20,7 @@ const NotesServices = {
       .update(newUserFields);
   }
 };
+
+module.exports = {
+  NotesServices
+};
