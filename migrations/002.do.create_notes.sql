@@ -4,4 +4,4 @@ CREATE TABLE notes(
     modified TIMESTAMP,
     folder_id TEXT,
     content TEXT NOT NULL
-)
+);

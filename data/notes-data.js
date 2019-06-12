@@ -3,6 +3,7 @@ function makeNotesArray() {
     {
       id: 1,
       note_name: "Dogs",
+      //NEED TO ADD COLUMNS TO TABLE
       // modified: "2019-01-03T00:00:00.000Z",
       // folderId: "b0715efe-ffaf-11e8-8eb2-f2801f1b9fd1",
       content:

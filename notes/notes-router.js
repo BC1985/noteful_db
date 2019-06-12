@@ -1,16 +1,16 @@
 const express = require("express");
-const NotesServices = require("./note-services");
+const { NotesServices } = require("./note-services");
 const notesRouter = express.Router();
 const { makeNotesArray } = require("../data/notes-data");
 const jsonParser = express.json();
 
 notesRouter
-  .route("/notes")
+  .route("/")
   .get((req, res, next) => {
     const knexInstance = req.app.get("db");
     NotesServices.getAllNotes(knexInstance)
       .then(notes => {
-        res.json(notes.map(makeNotesArray));
+        res.json(notes);
       })
       .catch(next);
   })
@@ -34,7 +34,7 @@ notesRouter
       .catch(next);
 
     notesRouter
-      .route("/:note_id")
+      .route("/api/:note_id")
       .all((req, res, next) => {
         NotesServices.getNoteById(req.app.get("db"), req.params.note_id)
           .then(note => {

@@ -1,8 +1,8 @@
-INSERT INTO folders (id, name)
+INSERT INTO folders (name)
 VALUES
-(1, 'Important'),
-(2, 'Super'),
-(3, 'Spangley');
+('Important'),
+('Super'),
+('Spangley');
   
 INSERT INTO notes (id, note_name, content)
 VALUES
