@@ -55,8 +55,8 @@ folderRouter
       .catch(next);
   })
   .put(jsonParser, (req, res, next) => {
-    const { name } = req.body;
-    const folderToUpdate = { name };
+    const { name, age } = req.body;
+    const folderToUpdate = { name, age };
     console.log("====================================");
     console.log(folderToUpdate);
     console.log("====================================");
@@ -75,7 +75,7 @@ folderRouter
     )
       .then(numRowsAffected => {
         res
-          .status(204)
+          .status(200)
           .send("updated")
           .end();
       })

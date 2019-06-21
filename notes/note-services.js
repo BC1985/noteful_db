@@ -2,6 +2,11 @@ const NotesServices = {
   getAllNotes(knex) {
     return knex.select("*").from("notes");
   },
+  createNote(knex, note) {
+    return knex("notes")
+      .returning(["id", "note_name"])
+      .insert(note);
+  },
   getNoteById(knex, id) {
     return knex
       .from("notes")

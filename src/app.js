@@ -1,6 +1,3 @@
-//FIX ENDPOINTS
-//ADD UPDATE FOLDERS AND NOTES FUNCTION TO ROUTER
-
 require("dotenv").config();
 const express = require("express");
 const morgan = require("morgan");
@@ -13,7 +10,7 @@ const app = express();
 
 const morganOption = NODE_ENV === "production";
 app.use(morgan(morganOption));
-app.use(cors());
+app.use(cors("*"));
 app.use(helmet());
 app.use("/api/folders", folderRouter);
 app.use("/api/notes", notesRouter);
@@ -32,13 +29,5 @@ app.use(function errorHandler(error, req, res, next) {
   }
   res.status(500).json(response);
 });
-
-// app.use(function errorHandler(err, req, res, next) {
-//   if (res.headersSent && NODE_ENV === "production") {
-//     return next(err);
-//   }
-//   res.status(500);
-//   res.render("error", { error: err });
-// });
 
 module.exports = app;

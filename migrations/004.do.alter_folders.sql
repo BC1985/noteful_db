@@ -1,0 +1,2 @@
+ALTER TABLE folders
+ADD COLUMN age INTEGER 

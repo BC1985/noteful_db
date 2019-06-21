@@ -1,7 +1,6 @@
 const express = require("express");
 const { NotesServices } = require("./note-services");
 const notesRouter = express.Router();
-const { makeNotesArray } = require("../data/notes-data");
 const jsonParser = express.json();
 
 notesRouter
@@ -15,8 +14,8 @@ notesRouter
       .catch(next);
   })
   .post(jsonParser, (req, res, next) => {
-    const { note_name } = req.body;
-    const newNote = { note_name };
+    const { note_name, content } = req.body;
+    const newNote = { note_name, content };
 
     for (const [key, value] of Object.entries(newNote))
       if (value == null)
@@ -24,11 +23,11 @@ notesRouter
           error: { message: `Missing '${key}' in request body` }
         });
 
-    NotesService.insertNote(req.app.get("db"), newNote)
+    NotesServices.createNote(req.app.get("db"), newNote)
       .then(note => {
         res
           .status(201)
-          .location(path.posix.join(req.originalUrl, `/${note.id}`))
+
           .json(serializeNote(note));
       })
       .catch(next);
@@ -50,7 +49,7 @@ notesRouter
       })
       .delete((req, res, next) => {
         NotesService.deleteNote(req.app.get("db"), req.params.note_id)
-          .then(numRowsAffected => {
+          .then(() => {
             res.status(204).end();
           })
           .catch(next);
