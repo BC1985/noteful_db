@@ -6,7 +6,7 @@ CREATE TABLE folders(
 CREATE TABLE notes(
     id serial,
     note_name TEXT NOT NULL,
-    modified TIMESTAMP,
+    modified TIMESTAMP NOT NULL,
     folder_id TEXT,
     content TEXT NOT NULL
 );
