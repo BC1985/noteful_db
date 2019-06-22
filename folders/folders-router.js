@@ -1,8 +1,6 @@
 const express = require("express");
 const { FolderServices } = require("./folder-services");
 const folderRouter = express.Router();
-const { makeFoldersArray } = require("../data/folder-data");
-const xss = require("xss");
 const jsonParser = express.json();
 
 folderRouter
@@ -16,9 +14,7 @@ folderRouter
   .post(jsonParser, (req, res, next) => {
     const { name } = req.body;
     const newFolder = { name };
-    console.log("====================================");
-    console.log(newFolder);
-    console.log("====================================");
+
     for (const [key, value] of Object.entries(newFolder))
       if (value == null)
         return res.status(400).json({
@@ -26,21 +22,24 @@ folderRouter
         });
 
     FolderServices.createFolder(req.app.get("db"), newFolder)
-      .then(folders => {
-        res.status(201).json(folders[0]);
+      .then(folder => {
+        res
+          .status(201)
+          .send(`Folder created`)
+          .json(folder[0]);
       })
       .catch(next);
   });
+
 folderRouter
   .route("/:folder_id")
   .get((req, res, next) => {
-    //WHAT DOES REQ.APP.GET ACTUALLY DO?
-    FolderServices.getFolderById(req.app.get("db"), req.params.folder_id)
+    const { folder_id } = req.params;
+
+    FolderServices.getFolderById(req.app.get("db"), folder_id)
       .then(folder => {
         if (!folder) {
-          return res.status(404).json({
-            error: { message: `folder doesn't exist` }
-          });
+          return res.status(404).send(`folder doesn't exist`);
         }
         res.json(folder);
         next();
@@ -48,18 +47,19 @@ folderRouter
       .catch(next);
   })
   .delete((req, res, next) => {
-    FolderServices.deleteFolder(req.app.get("db"), req.params.folder_id)
-      .then(numRowsAffected => {
-        res.send("deleted").end();
+    const { folder_id } = req.params;
+
+    FolderServices.deleteFolder(req.app.get("db"), folder_id)
+      .then(() => {
+        res.send(`Folder with id ${folder_id} deleted`).end();
       })
       .catch(next);
   })
   .put(jsonParser, (req, res, next) => {
-    const { name, age } = req.body;
-    const folderToUpdate = { name, age };
-    console.log("====================================");
+    const { folder_id } = req.params;
+    const { name } = req.body;
+    const folderToUpdate = { name };
     console.log(folderToUpdate);
-    console.log("====================================");
     const numberOfValues = Object.values(folderToUpdate).filter(Boolean).length;
     if (numberOfValues === 0)
       return res.status(400).json({
@@ -68,15 +68,11 @@ folderRouter
         }
       });
 
-    FolderServices.updateFolder(
-      req.app.get("db"),
-      req.params.folder_id,
-      folderToUpdate
-    )
-      .then(numRowsAffected => {
+    FolderServices.updateFolder(req.app.get("db"), folder_id, folderToUpdate)
+      .then(() => {
         res
           .status(200)
-          .send("updated")
+          .send(`Folder with id ${folder_id} updated`)
           .end();
       })
       .catch(next);
