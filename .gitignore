@@ -2,3 +2,6 @@ node_modules
 example.env
 .env
 .DS_Store
+migrations/002.do.create_notes.sql
+migrations/001.do.create_folders.sql
+migrations/004.do.alter_folders.sql
