@@ -4,19 +4,19 @@ VALUES
 ('Super'),
 ('Spangley');
   
-INSERT INTO notes (modified, note_name, content)
+INSERT INTO notes (note_name, content)
 VALUES
-('20190621 04:36:40 pm','Dogs', 'Corporis accusamus placeat quas non voluptas. Harum fugit molestias.'),
-('20190621 04:36:40 pm','Cats', 'Corporis accusamus placeat quas non voluptas. Harum fugit molestias.'),
-('20190621 04:36:40 pm', 'Pigs', 'Corporis accusamus placeat quas non voluptas. Harum fugit molestias.'),
-('20190621 04:36:40 pm', 'Birds', 'Corporis accusamus placeat quas non voluptas. Harum fugit molestias.'),
-('20190621 04:36:40 pm', 'Bears', 'Corporis accusamus placeat quas non voluptas. Harum fugit molestias.'),
-('20190621 04:36:40 pm', 'Horses', 'Corporis accusamus placeat quas non voluptas. Harum fugit molestias.'),
-('20190621 04:36:40 pm', 'Tigers', 'Corporis accusamus placeat quas non voluptas. Harum fugit molestias.'),
-('20190621 04:36:40 pm', 'Wolves', 'Corporis accusamus placeat quas non voluptas. Harum fugit molestias.'),
-('20190621 04:36:40 pm', 'Elephants', 'Corporis accusamus placeat quas non voluptas. Harum fugit molestias.'),
-('20190621 04:36:40 pm', 'Lions', 'Corporis accusamus placeat quas non voluptas. Harum fugit molestias.'),
-('20190621 04:36:40 pm', 'Monkeys', 'Corporis accusamus placeat quas non voluptas. Harum fugit molestias.'),
-('20190621 04:36:40 pm', 'Bats', 'Corporis accusamus placeat quas non voluptas. Harum fugit molestias.'),
-('20190621 04:36:40 pm', 'Turtles', 'Corporis accusamus placeat quas non voluptas. Harum fugit molestias.'),
-('20190621 04:36:40 pm', 'Zebras', 'Corporis accusamus placeat quas non voluptas. Harum fugit molestias.');
+('Dogs', 'Corporis accusamus placeat quas non voluptas. Harum fugit molestias.'),
+('Cats', 'Corporis accusamus placeat quas non voluptas. Harum fugit molestias.'),
+('Pigs', 'Corporis accusamus placeat quas non voluptas. Harum fugit molestias.'),
+('Birds', 'Corporis accusamus placeat quas non voluptas. Harum fugit molestias.'),
+('Bears', 'Corporis accusamus placeat quas non voluptas. Harum fugit molestias.'),
+('Horses', 'Corporis accusamus placeat quas non voluptas. Harum fugit molestias.'),
+('Tigers', 'Corporis accusamus placeat quas non voluptas. Harum fugit molestias.'),
+('Wolves', 'Corporis accusamus placeat quas non voluptas. Harum fugit molestias.'),
+('Elephants', 'Corporis accusamus placeat quas non voluptas. Harum fugit molestias.'),
+('Lions', 'Corporis accusamus placeat quas non voluptas. Harum fugit molestias.'),
+('Monkeys', 'Corporis accusamus placeat quas non voluptas. Harum fugit molestias.'),
+('Bats', 'Corporis accusamus placeat quas non voluptas. Harum fugit molestias.'),
+('Turtles', 'Corporis accusamus placeat quas non voluptas. Harum fugit molestias.'),
+('Zebras', 'Corporis accusamus placeat quas non voluptas. Harum fugit molestias.');
