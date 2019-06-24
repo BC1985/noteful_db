@@ -24,33 +24,33 @@ notesRouter
         });
 
     NotesServices.createNote(req.app.get("db"), newNote)
-      .then(note => {
-        res
-          .status(201)
+      .then(() => {
+        res.status(201);
 
-          .json(serializeNote(note));
+        // .json(serializeNote(note));
       })
       .catch(next);
 
     notesRouter
-      .route("/api/:note_id")
-      .all((req, res, next) => {
+      .route("/:note_id")
+      .get((req, res, next) => {
         NotesServices.getNoteById(req.app.get("db"), req.params.note_id)
           .then(note => {
-            if (!note) {
-              return res.status(404).json({
-                error: { message: `note doesn't exist` }
-              });
-            }
-            res.note = note;
-            next();
+            // if (!note) {
+            //   res.send(`note doesn't exist`).end()
+            //   .json({error: { message: `note doesn't exist` }});
+            // }
+            res
+              .status(200)
+              .res.json(note)
+              .end();
           })
           .catch(next);
       })
       .delete((req, res, next) => {
-        NotesService.deleteNote(req.app.get("db"), req.params.note_id)
+        NotesServices.deleteNote(req.app.get("db"), req.params.note_id)
           .then(() => {
-            res.status(204).end();
+            res.send("deleted").end();
           })
           .catch(next);
       });
