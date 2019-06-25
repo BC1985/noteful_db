@@ -4,7 +4,7 @@ const NotesServices = {
   },
   createNote(knex, note) {
     return knex("notes")
-      .returning(["id", "note_name"])
+      .returning(["id", "note_name", "content", "folder_id"])
       .insert(note);
   },
   getNoteById(knex, id) {

@@ -14,8 +14,9 @@ notesRouter
       .catch(next);
   })
   .post(jsonParser, (req, res, next) => {
-    const { note_name, content } = req.body;
-    const newNote = { note_name, content };
+    const { note_name, content, folder_id } = req.body;
+    const newNote = { folder_id, note_name, content };
+    console.log(newNote);
 
     for (const [key, value] of Object.entries(newNote))
       if (value == null)
@@ -24,39 +25,38 @@ notesRouter
         });
 
     NotesServices.createNote(req.app.get("db"), newNote)
-      .then(() => {
-        res.status(201);
+      .then(notes => {
+        res.status(201).json(notes[0]);
 
         // .json(serializeNote(note));
       })
-      .catch(next);
-
-    notesRouter
-      .route("/:note_id")
-      .get((req, res, next) => {
-        NotesServices.getNoteById(req.app.get("db"), req.params.note_id)
-          .then(note => {
-            // if (!note) {
-            //   res.send(`note doesn't exist`).end()
-            //   .json({error: { message: `note doesn't exist` }});
-            // }
-            res
-              .status(200)
-              .res.json(note)
-              .end();
-          })
-          .catch(next);
-      })
-      .delete((req, res, next) => {
-        NotesServices.deleteNote(req.app.get("db"), req.params.note_id)
-          .then(() => {
-            res
-              .status(204)
-              .send("deleted")
-              .end();
-          })
-          .catch(next);
-      });
+      .catch(err => console.log(err));
   });
 
+notesRouter
+  .route("/:note_id")
+  .get((req, res, next) => {
+    NotesServices.getNoteById(req.app.get("db"), req.params.note_id)
+      .then(note => {
+        // if (!note) {
+        //   res.send(`note doesn't exist`).end()
+        //   .json({error: { message: `note doesn't exist` }});
+        // }
+        res
+          .status(200)
+          .res.json(note)
+          .end();
+      })
+      .catch(next);
+  })
+  .delete((req, res, next) => {
+    NotesServices.deleteNote(req.app.get("db"), req.params.note_id)
+      .then(() => {
+        res
+          .status(204)
+          .send("deleted")
+          .end();
+      })
+      .catch(next);
+  });
 module.exports = notesRouter;

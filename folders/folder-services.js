@@ -3,26 +3,26 @@ const FolderServices = {
     return knex.select("*").from("folders");
   },
 
-  getFolderById(knex, id) {
+  getFolderById(knex, folder_id) {
     return knex
       .from("folders")
       .select("*")
-      .where("id", id)
+      .where("folder_id", folder_id)
       .first();
   },
   createFolder(knex, folder) {
     return knex("folders")
-      .returning(["id", "name"])
+      .returning(["folder_id", "name"])
       .insert(folder);
   },
-  deleteFolder(knex, id) {
+  deleteFolder(knex, folder_id) {
     return knex("folders")
-      .where({ id })
+      .where({ folder_id })
       .delete();
   },
-  updateFolder(knex, id, newFolderFields) {
+  updateFolder(knex, folder_id, newFolderFields) {
     return knex("folders")
-      .where("id", id)
+      .where("folder_id", folder_id)
       .update(newFolderFields);
   }
 };
