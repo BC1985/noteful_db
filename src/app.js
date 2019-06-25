@@ -9,7 +9,7 @@ const notesRouter = require("../notes/notes-router");
 const app = express();
 
 const morganOption = NODE_ENV === "production";
-app.use(morgan(morganOption));
+app.use(morgan("dev"));
 app.use(cors("*"));
 app.use(helmet());
 app.use("/api/folders", folderRouter);
