@@ -36,16 +36,16 @@ notesRouter
 notesRouter
   .route("/:note_id")
   .get((req, res, next) => {
-    NotesServices.getNoteById(req.app.get("db"), req.params.note_id)
+    const { note_id } = req.params;
+    NotesServices.getNoteById(req.app.get("db"), note_id)
       .then(note => {
-        // if (!note) {
-        //   res.send(`note doesn't exist`).end()
-        //   .json({error: { message: `note doesn't exist` }});
-        // }
-        res
-          .status(200)
-          .res.json(note)
-          .end();
+        if (!note) {
+          return res
+            .status(404)
+            .json({ error: { message: `note doesn't exist` } });
+        }
+        res.status(200);
+        res.json(note).next();
       })
       .catch(next);
   })
@@ -58,5 +58,24 @@ notesRouter
           .end();
       })
       .catch(next);
+  })
+  .put(jsonParser, (req, res, next) => {
+    const { content, note_name } = req.body;
+    const noteToUpdate = { content, note_name };
+    const { id } = req.params;
+    const numberOfValues = Object.values(noteToUpdate).filter(Boolean).length;
+
+    if (numberOfValues === 0) {
+      return res.status(400).json({
+        error: { message: "Note must contain name and content" }
+      });
+    }
+    NotesServices.updateNotes(req.app.get("db"), id, noteToUpdate).then(() => {
+      res
+        .status(200)
+        .send(`Note with id ${id} updated`)
+        .end()
+        .catch(next);
+    });
   });
 module.exports = notesRouter;
