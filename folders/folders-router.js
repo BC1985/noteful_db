@@ -23,10 +23,7 @@ folderRouter
 
     FolderServices.createFolder(req.app.get("db"), newFolder)
       .then(folder => {
-        res
-          .status(201)
-          .send(`Folder created`)
-          .json(folder[0]);
+        res.status(201).json(folder[0]);
       })
       .catch(next);
   });
@@ -51,7 +48,10 @@ folderRouter
 
     FolderServices.deleteFolder(req.app.get("db"), folder_id)
       .then(() => {
-        res.send(`Folder with id ${folder_id} deleted`).end();
+        res
+          .status(204)
+          .send(`Folder with id ${folder_id} deleted`)
+          .end();
       })
       .catch(next);
   })
