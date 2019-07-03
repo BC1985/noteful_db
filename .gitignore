@@ -5,3 +5,9 @@ example.env
 migrations/002.do.create_notes.sql
 migrations/001.do.create_folders.sql
 migrations/004.do.alter_folders.sql
+migrations/003.do.alter_notes.sql
+postgrator-production.config.js
+migrations/001.do.create_folders.sql
+migrations/002.do.create_notes.sql
+migrations/002.undo.create_notes.sql
+migrations/004.do.alter_folders.sql
